@@ -1,3 +1,4 @@
+import os
 import torch
 import numpy as np
 
@@ -8,7 +9,10 @@ class Core:
         self.device = device
         if device != 'cpu':
             raise NotImplementedError('Only CPU device supported')
-        self.model = torch.jit.load('./weights/model_cpu.pt', map_location=device)
+
+        model_path = os.path.dirname(os.path.abspath(__file__))
+        model_path = os.path.join(model_path, 'weights/model_cpu.pt')
+        self.model = torch.jit.load(model_path, map_location=device)
         self.model.eval()
 
         self.label2num = {
