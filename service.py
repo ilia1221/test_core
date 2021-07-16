@@ -9,7 +9,8 @@ from wavefront import load_obj
 from core import Core
 
 
-UPLOAD_FOLDER = './test_shapes'
+CURRENT_FOLDER =os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(CURRENT_FOLDER, 'test_shapes')
 ALLOWED_EXTENSIONS = set(['obj'])
 
 app = Flask(__name__)
@@ -20,7 +21,7 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 def draw_activations(act, num2label):
     fig = plt.figure(figsize=(5, 5))
     sns_plot = sns.barplot(x=num2label, y=act)
-    full_filename = './static/activations.png'
+    full_filename = os.path.join(CURRENT_FOLDER, 'static', 'activations.png')
     fig = sns_plot.get_figure()
     fig.savefig(full_filename)
 
@@ -30,7 +31,7 @@ def draw_points(points):
     ax = fig.add_subplot(111, projection="3d")
     ax.scatter(points[:, 0], points[:, 1], points[:, 2])
     ax.set_axis_off()
-    full_filename = './static/points.png'
+    full_filename = os.path.join(CURRENT_FOLDER, 'static', 'points.png')
     fig.savefig(full_filename)
 
 
