@@ -65,5 +65,5 @@ def upload_file():
 
 if __name__ == '__main__':
    core = Core(device='cpu')
-   app.run()
+   app.run(host='0.0.0.0')
 
